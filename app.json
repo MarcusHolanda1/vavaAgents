@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "vavaAgents",
+    "slug": "vavaAgents",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
