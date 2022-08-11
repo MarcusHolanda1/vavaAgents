@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 
 import { useTheme } from "../../../contexts/theme";
-import IMAGES from "../../../assets/";
+import IMAGES from "../../../assets";
 import * as S from "./styles";
-import theme from "../../theme";
-import { Page } from "../../structures";
-import { Button, Text } from "../../components";
+import theme from "../../shared/theme";
+import { Page } from "../../shared/structures";
+import { Button, Text } from "../../shared/components";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../navigation";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -15,20 +16,27 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 type HomeScreenProps = NativeStackNavigationProp<RootStackParamList, "Cards">;
 
 const Home = () => {
+  const [switchIsEnabled, setSwitchIsEnabled] = useState<boolean>(false);
+  const [inputText, onChangeInputText] = useState<string>("Digite seu nome");
+
   const { handleChangeTheme } = useTheme();
   const { currentTheme } = useTheme();
   const navigation = useNavigation<HomeScreenProps>();
-
-  const [switchIsEnabled, setsWitchIsEnabled] = useState<boolean>(false);
-  const [inputText, onChangeInputText] = useState<string>("Digite seu nome");
+  const isFocused = useIsFocused();
 
   const toggleSwitch = () => {
-    setsWitchIsEnabled((previousState) => !previousState);
+    setSwitchIsEnabled((previousState) => !previousState);
   };
 
   const handleGoToCards = () => {
     navigation.navigate("Cards", { name: inputText });
   };
+
+  useEffect(() => {
+    if (isFocused) {
+      onChangeInputText("Digite seu nome");
+    }
+  }, [isFocused]);
 
   return (
     <Page
@@ -43,7 +51,7 @@ const Home = () => {
       }
     >
       <>
-        <S.ContentSwitch>
+        <S.ContainerSwitch>
           <Text
             type="h1"
             color={
@@ -55,26 +63,28 @@ const Home = () => {
           >
             Dark Mode
           </Text>
-          <Switch
-            trackColor={{
-              false: theme.light.colors.secondary,
-              true: theme.dark.colors.primary,
-            }}
-            thumbColor={
-              switchIsEnabled
-                ? theme.dark.colors.backgroundShape
-                : theme.light.colors.backgroundShape
-            }
-            ios_backgroundColor={
-              currentTheme === "light"
-                ? theme.light.colors.secondary
-                : theme.dark.colors.backgroundShape
-            }
-            onValueChange={toggleSwitch}
-            onChange={handleChangeTheme}
-            value={switchIsEnabled}
-          />
-        </S.ContentSwitch>
+          <S.ContentSwitch>
+            <Switch
+              trackColor={{
+                false: theme.light.colors.secondary,
+                true: theme.dark.colors.primary,
+              }}
+              thumbColor={
+                switchIsEnabled
+                  ? theme.dark.colors.backgroundShape
+                  : theme.light.colors.backgroundShape
+              }
+              ios_backgroundColor={
+                currentTheme === "light"
+                  ? theme.light.colors.secondary
+                  : theme.dark.colors.backgroundShape
+              }
+              onValueChange={toggleSwitch}
+              onChange={handleChangeTheme}
+              value={switchIsEnabled}
+            />
+          </S.ContentSwitch>
+        </S.ContainerSwitch>
 
         <S.ContentPlay>
           <S.InputText
@@ -94,8 +104,8 @@ const Home = () => {
             }
           >
             <S.ContentButton>
-              <Text type="h1" color={theme.light.colors.backgroundShape}>
-                Jogar
+              <Text type="h2" color={theme.light.colors.backgroundShape}>
+                Ver Cartas
               </Text>
               <Ionicons
                 name="play"
