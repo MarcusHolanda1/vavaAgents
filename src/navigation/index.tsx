@@ -17,7 +17,6 @@ import Cards from "../UI/screens/Cards";
 const Stack = createNativeStackNavigator();
 
 export type RootStackParamList = {
-  Home: undefined;
   Cards: {
     name: string;
   };
