@@ -10,7 +10,7 @@ type ThemeContextData = {
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
 
 export const ThemeProvider: React.FC = ({ children }) => {
-  const [selectedTheme, setSelectedTheme] = useState<Themes>("light");
+  const [selectedTheme, setSelectedTheme] = useState<Themes>("dark");
 
   const handleChangeTheme = useCallback(() => {
     setSelectedTheme(selectedTheme === "light" ? "dark" : "light");
