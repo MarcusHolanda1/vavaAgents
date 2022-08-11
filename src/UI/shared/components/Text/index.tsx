@@ -1,11 +1,11 @@
 import React from "react";
 
-import { StyleProp, TextStyle } from "react-native";
+import { StyleProp, TextProps, TextStyle } from "react-native";
 
 import * as S from "./styles";
 
 interface Props {
-  children: any;
+  children: TextProps;
   type?: "h1" | "p" | "h2" | "h3";
   color?: string;
   fontFamily?: string;
