@@ -2,7 +2,6 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
-  useFonts,
   Roboto_300Light,
   Roboto_400Regular,
   Roboto_500Medium,
