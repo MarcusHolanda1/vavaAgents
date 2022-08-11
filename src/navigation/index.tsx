@@ -8,7 +8,8 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
-import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 
 import Home from "../UI/screens/Home";
 import Cards from "../UI/screens/Cards";
@@ -22,21 +23,48 @@ export type RootStackParamList = {
   };
 };
 
-function MainApp() {
-  let [fontsLoaded] = useFonts({
-    Roboto_300Light,
-    Roboto_400Regular,
-    Roboto_500Medium,
-    Roboto_700Bold,
-  });
+SplashScreen.preventAutoHideAsync();
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
+function MainApp() {
+  const [appIsReady, setAppIsReady] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    async function prepare() {
+      try {
+        await Font.loadAsync({
+          Roboto_300Light,
+          Roboto_400Regular,
+          Roboto_500Medium,
+          Roboto_700Bold,
+        });
+
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = React.useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+    <NavigationContainer onReady={onLayoutRootView}>
+      <Stack.Navigator
+        screenOptions={{ headerShown: false }}
+        initialRouteName="Home"
+      >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Cards" component={Cards} />
       </Stack.Navigator>
