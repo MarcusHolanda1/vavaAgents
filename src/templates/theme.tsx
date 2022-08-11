@@ -2,7 +2,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 
 import { useTheme } from "../contexts/theme";
-import theme from "../UI/theme";
+import theme from "../UI/shared/theme";
 
 type Props = {
   children: React.ReactNode;
