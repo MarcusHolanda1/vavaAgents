@@ -77,7 +77,7 @@ const Home = () => {
               ios_backgroundColor={
                 currentTheme === "light"
                   ? theme.light.colors.secondary
-                  : theme.dark.colors.backgroundShape
+                  : theme.dark.colors.secondary
               }
               onValueChange={toggleSwitch}
               onChange={handleChangeTheme}
