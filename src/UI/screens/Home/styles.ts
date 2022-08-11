@@ -1,6 +1,6 @@
 import { TextInput, TextInputProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import theme, { spacing } from "../../theme";
+import theme, { spacing } from "../../shared/theme";
 
 interface InputTextProps {
   currenTheme: "light" | "dark";
@@ -13,10 +13,7 @@ export const Title = styled.Text`
   `}
 `;
 
-export const InputText = styled(TextInput).attrs<TextInputProps>(() => ({
-  placeholderTextColor: "#fff",
-  underlineColorAndroid: "#fff",
-}))`
+export const InputText = styled(TextInput)`
   ${({ theme, currenTheme }: InputTextProps) => css`
     background-color: ${currenTheme === "light"
       ? theme.colors.secondary
@@ -40,6 +37,11 @@ export const ContentButton = styled.View`
   padding: ${spacing.n8}px;
 `;
 
-export const ContentSwitch = styled.View`
+export const ContainerSwitch = styled.View`
   padding-bottom: ${spacing.n12}px;
+`;
+
+export const ContentSwitch = styled.View`
+  justify-content: flex-start;
+  flex-direction: row;
 `;
