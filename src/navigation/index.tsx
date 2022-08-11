@@ -39,8 +39,8 @@ function MainApp() {
         });
 
         await new Promise((resolve) => setTimeout(resolve, 1500));
-      } catch (e) {
-        console.warn(e);
+      } catch (error) {
+        return error;
       } finally {
         setAppIsReady(true);
       }
