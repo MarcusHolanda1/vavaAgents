@@ -11,7 +11,7 @@
 
 <h3 align="left">Descrição</h3>
 
-<p align="left">O vavaAgents consiste em um simples sistema que permite você gerar cartas aleatórias com o tema Valorant e embaralhar essas cartas</p>
+<p align="left">O vavaAgents consiste em um simples sistema que permite você gerar cartas aleatórias com o tema Valorant, embaralhar essas cartas e fazer um sorteio</p>
 
  <h3 align="left">Projeto</h3>
 <p>Neste projeto foi utilizado o framework React Native e as seguintes bibliotecas:</p>
